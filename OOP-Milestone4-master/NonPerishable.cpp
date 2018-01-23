@@ -9,11 +9,11 @@ using namespace std;
 namespace ict {
     //protected
     bool NonPerishable::ok()const{
-		return m_err.isClear();
+	return m_err.isClear();
     }
     
     void NonPerishable::error(const char* message){
-		m_err = message;
+	m_err = message;
     }
     
     char NonPerishable::signature()const{
@@ -28,21 +28,23 @@ namespace ict {
     }
     
     std::fstream& NonPerishable::load(std::fstream& file){
-        char sku[MAX_SKU_LEN + 1]; char name[128];
-        double price; int quantity, taxed;
-		file.getline(sku, MAX_SKU_LEN, ',');
+        char sku[MAX_SKU_LEN + 1];
+	char name[128];
+        double price; 
+	int quantity, taxed;
+	file.getline(sku, MAX_SKU_LEN, ',');
         file.getline(name, 128,',');
-		file >> price;
-		file.ignore(256, ',');
-		file >> taxed;
+	file >> price;
+	file.ignore(256, ',');
+	file >> taxed;
         file.ignore(256, ',');
-		file >> quantity;
+	file >> quantity;
 
-		NonPerishable::sku(sku);
-		NonPerishable::name(name);
-		NonPerishable::price(price);
-		NonPerishable::quantity(quantity);
-		NonPerishable::taxed(taxed == 1);
+	NonPerishable::sku(sku);
+	NonPerishable::name(name);
+	NonPerishable::price(price);
+	NonPerishable::quantity(quantity);
+	NonPerishable::taxed(taxed == 1);
 
         return file;
     }
@@ -70,7 +72,8 @@ namespace ict {
 	}
 	std::istream & NonPerishable::read(std::istream & is){
 		char sku_[MAX_SKU_LEN + 1], name_[128], taxed_;
-		double price_; int quantity_;
+		double price_;
+		int quantity_;
 		m_err.clear();
 
 		if (!is.fail()) {
